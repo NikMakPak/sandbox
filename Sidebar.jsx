@@ -1,26 +1,48 @@
-import React from 'react';
-import { useDnD } from './DnDContext';
+import React from "react";
+import { useDnD } from "./DnDContext";
 
-export default () => {
-  const [_, setType] = useDnD();
+const Sidebar = () => {
+  const [, setType] = useDnD(); // Получаем функцию для установки типа узла
 
   const onDragStart = (event, nodeType) => {
-    setType(nodeType);
-    event.dataTransfer.effectAllowed = 'move';
+    setType(nodeType); // Устанавливаем тип узла для перетаскивания
+    event.dataTransfer.setData("application/reactflow", nodeType);
+    event.dataTransfer.effectAllowed = "move";
   };
 
   return (
     <aside>
-      <div className="description">You can drag these nodes to the pane on the right.</div>
-      <div className="dndnode input" onDragStart={(event) => onDragStart(event, 'input')} draggable>
+      <div className="description">Перетащите узлы в рабочее пространство:</div>
+      <div
+        className="dndnode input"
+        onDragStart={(event) => onDragStart(event, "input")}
+        draggable
+      >
         Input Node
       </div>
-      <div className="dndnode" onDragStart={(event) => onDragStart(event, 'default')} draggable>
-        Default Node
+      <div
+        className="dndnode input"
+        onDragStart={(event) => onDragStart(event, "DefaultNode")}
+        draggable
+      >
+        Two point Node
       </div>
-      <div className="dndnode output" onDragStart={(event) => onDragStart(event, 'output')} draggable>
+      <div
+        className="dndnode output"
+        onDragStart={(event) => onDragStart(event, "output")}
+        draggable
+      >
         Output Node
+      </div>
+      <div
+        className="dndnode mechanism"
+        onDragStart={(event) => onDragStart(event, "mechanismNode")} // Добавляем возможность перетаскивать новый узел
+        draggable
+      >
+        Mechanism Node
       </div>
     </aside>
   );
 };
+
+export default Sidebar;

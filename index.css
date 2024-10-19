@@ -5,6 +5,12 @@ body {
   box-sizing: border-box;
 }
 
+.dndnode.mechanism {
+  border-color: #f39c12;
+  background-color: #f7dc6f;
+}
+
+
 #app {
   width: 100vw;
   height: 100vh;
